@@ -11,7 +11,7 @@
   function updateThemeButton() {
     if (!themeBtn) return;
     const isLight = root.getAttribute("data-theme") === "light";
-    themeBtn.textContent = isLight ? "🌙 다크 모드" : "☀️ 라이트 모드";
+    themeBtn.textContent = isLight ? "다크 모드" : "라이트 모드";
   }
 
   if (themeBtn) {
