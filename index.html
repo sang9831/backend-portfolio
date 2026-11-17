@@ -272,7 +272,6 @@
           </p>
           <div class="tag-row">
             <span class="tag">PostgreSQL</span>
-            <span class="tag">Redis</span>
             <span class="tag">Docker</span>
             <span class="tag">k6</span>
           </div>
@@ -340,7 +339,7 @@
         <span class="flow-arrow">→</span>
         <span class="flow-node">한정 상품 공개 · WISH 알림</span>
         <span class="flow-arrow">→</span>
-        <span class="flow-node highlight">주문 · 결제 (동시성 제어)</span>
+        <span class="flow-node">주문 · 결제</span>
         <span class="flow-arrow">→</span>
         <span class="flow-node">송장 등록 · Mock 배송 상태 조회</span>
       </div>
@@ -401,11 +400,11 @@
           <div class="flow-strip">
             <span class="flow-node">서류 업로드 · DEK 생성</span>
             <span class="flow-arrow">→</span>
-            <span class="flow-node highlight">AES-256-GCM 암호화 → 비공개 Storage</span>
+            <span class="flow-node">AES-256-GCM 암호화 → 비공개 Storage</span>
             <span class="flow-arrow">→</span>
             <span class="flow-node">마스터키로 DEK 암호화 → DB</span>
             <span class="flow-arrow">→</span>
-            <span class="flow-node highlight">운영자 열람 · 복호화 · 워터마크 · 접근 로그</span>
+            <span class="flow-node">운영자 열람 · 복호화 · 워터마크 · 접근 로그</span>
           </div>
           <div class="detail-grid">
             <div class="detail-box">
@@ -493,7 +492,7 @@
             <span class="flow-arrow">→</span>
             <span class="flow-node">배송 출발</span>
             <span class="flow-arrow">→</span>
-            <span class="flow-node highlight">배송 완료 · 주문 상태 및 시각 갱신</span>
+            <span class="flow-node">배송 완료 · 주문 상태 및 시각 갱신</span>
           </div>
           <div class="detail-grid">
             <div class="detail-box">
@@ -543,7 +542,7 @@
             <span class="flow-arrow">→</span>
             <span class="flow-node">구독·전송 방 ID 참여자 검증</span>
             <span class="flow-arrow">→</span>
-            <span class="flow-node highlight">전송량·방 상태 확인 → DB · STOMP 전달</span>
+            <span class="flow-node">전송량·방 상태 확인 → DB · STOMP 전달</span>
           </div>
           <div class="detail-box" style="margin-top:12px;">
             <h4>핵심 구현 포인트</h4>
@@ -563,7 +562,7 @@
             <span class="flow-arrow">→</span>
             <span class="flow-node">AI 키워드 최대 4개 추출</span>
             <span class="flow-arrow">→</span>
-            <span class="flow-node highlight">1,536차원 벡터 1:N 저장</span>
+            <span class="flow-node">1,536차원 벡터 1:N 저장</span>
             <span class="flow-arrow">→</span>
             <span class="flow-node">Java 유사도 계산</span>
           </div>
@@ -718,7 +717,7 @@
           <div class="flow-strip">
             <span class="flow-node">AI 후보 7곳 생성</span>
             <span class="flow-arrow">→</span>
-            <span class="flow-node highlight">Kakao Local 검색</span>
+            <span class="flow-node">Kakao Local 검색</span>
             <span class="flow-arrow">→</span>
             <span class="flow-node">미확인 후보 제외</span>
             <span class="flow-arrow">→</span>
