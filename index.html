@@ -194,7 +194,10 @@
               <td class="num-after">49.44ms</td>
               <td><span class="tag green">-97.6%</span></td>
               <td>페이지 우선 조회 후 결제·취소 결합, 필터 없을 시 단순 COUNT</td>
-              <td class="mono">V35 재측정</td>
+              <td>
+                <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/197" target="_blank" rel="noopener">PR #197</a>
+                <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/201" target="_blank" rel="noopener">PR #201</a>
+              </td>
             </tr>
             <tr>
               <td><strong>DROP 통계 조회 (HTTP p95)</strong></td>
@@ -202,7 +205,7 @@
               <td class="num-after">280.92ms</td>
               <td><span class="tag green">-97.4%</span></td>
               <td>전체 후보 LATERAL 집계 제거 → 표시할 DROP 페이지 선별 후 집계</td>
-              <td class="mono">V35 재측정</td>
+              <td><a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/193" target="_blank" rel="noopener">PR #193</a></td>
             </tr>
             <tr>
               <td><strong>대시보드 요약 (HTTP p95)</strong></td>
@@ -210,7 +213,7 @@
               <td class="num-after">362.20ms</td>
               <td><span class="tag green">-95.2%</span></td>
               <td>요약 지표 5회 쿼리 호출을 단일 집계 쿼리로 통합</td>
-              <td class="mono">V35 재측정</td>
+              <td><a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/193" target="_blank" rel="noopener">PR #193</a></td>
             </tr>
             <tr>
               <td><strong>동시 주문 상세 (HTTP p95)</strong></td>
@@ -218,7 +221,7 @@
               <td class="num-after">39.77ms</td>
               <td><span class="tag green">-93.9%</span></td>
               <td>불필요한 JOIN 및 집계 범위 축소</td>
-              <td class="mono">V35 재측정</td>
+              <td><a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/197" target="_blank" rel="noopener">PR #197</a></td>
             </tr>
             <tr>
               <td><strong>주문 생성 (HTTP p95)</strong></td>
@@ -234,7 +237,7 @@
               <td class="num-after">1회</td>
               <td><span class="tag green">-50.0%</span></td>
               <td><code>tryReserveOption</code> 조건부 <code>UPDATE ... RETURNING</code> 통합</td>
-              <td class="mono">GR-202</td>
+              <td><a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/219" target="_blank" rel="noopener">PR #219</a></td>
             </tr>
             <tr>
               <td><strong>Brevo SMTP 수신자 1명 추가 비용</strong></td>
@@ -242,7 +245,7 @@
               <td class="num-after">0.134초</td>
               <td><span class="tag green">약 -79%</span></td>
               <td>동일 DROP 알림 수신자를 BCC로 묶어 본문 1회 전송 (10명 수신 확인)</td>
-              <td class="mono">실측 기반</td>
+              <td><a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/187" target="_blank" rel="noopener">PR #187</a></td>
             </tr>
           </tbody>
         </table>
