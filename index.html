@@ -125,13 +125,13 @@
         </div>
 
         <!-- Schema & Test Environment Visual -->
-        <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;gap:16px;">
+        <div class="card" style="display:flex;flex-direction:column;gap:14px;">
           <div>
             <h3 class="card-title">DB 스키마 정규화 &amp; 부하테스트 환경</h3>
-            <p class="card-sub">동일 시드(DROP 1,000개 · 주문 20,000건) 및 네트워크 지연(netem 2.8ms) 모사 환경</p>
+            <p class="card-sub" style="margin-bottom:12px;">동일 시드(DROP 1,000개 · 주문 20,000건) 및 네트워크 지연(netem 2.8ms) 모사 환경</p>
 
             <!-- Schema SVG Comparison -->
-            <div style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:14px;">
+            <div style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
                 <span style="font-weight:700;font-size:0.9rem;">orders 테이블 구조 개선 (V34 · V35)</span>
                 <span class="tag green">1:1 분리 · 부분 인덱스 공유</span>
@@ -157,6 +157,19 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <!-- Normalization & Index Trade-off Details -->
+          <div style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <span style="font-weight:700;font-size:0.88rem;">정규화 · 인덱스 정비 내역</span>
+              <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/7109e208225bfcbc96eee7ddc4e9c41bf6eaaac5" target="_blank" rel="noopener">V34 7109e20</a>
+            </div>
+            <ul style="margin:0;padding-left:18px;font-size:0.83rem;color:var(--text-muted);line-height:1.55;">
+              <li><strong>1:1 테이블 분리</strong>: 배송지(<code>order_shipping_addresses</code>, 6개)·취소(<code>order_cancellations</code>, 4개) 분리 및 중복 시각 컬럼 제거</li>
+              <li><strong>부분 인덱스 통합(V35)</strong>: <code>WHERE status IN ('PAYMENT_PENDING','SHIPPED')</code>로 결제 만료·배송 배치 인덱스 공유</li>
+              <li><strong>쓰기·읽기 균형 계측</strong>: 배송 완료 조회 SQL <strong>-18.5%</strong> 개선과 함께 통합 인덱스 쓰기 WAL(+13.0~14.7%) 비용까지 기록</li>
+            </ul>
           </div>
 
           <!-- Load test specs -->
