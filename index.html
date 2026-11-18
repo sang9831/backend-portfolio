@@ -173,7 +173,7 @@
               <div style="font-weight:700;font-size:0.8rem;color:var(--text);margin-bottom:6px;">스펙 설정 근거</div>
               <ul style="margin:0;padding-left:18px;font-size:0.79rem;color:var(--text-muted);line-height:1.55;">
                 <li><strong>Backend (2 vCPU · 1 GiB / Heap 550 MiB)</strong>: 지급받은 <code>t3.small</code>(2 vCPU · 2 GiB) 환경에서 <code>t3.micro</code>(2 vCPU · 1 GiB) 스펙에 맞춰 보수적으로 자원 상한을 고정. Heap 550 MiB는 Non-Heap·GC·OS 여유분을 확보해 OOM을 방지하기 위한 설정</li>
-                <li><strong>PostgreSQL (1 vCPU · 512 MiB) &amp; HikariCP (max 10)</strong>: DB 자원을 타이트하게 제한해 쿼리·커넥션 풀 병목이 명확히 드러나도록 구성 (<code>Conn 60</code>은 앱·배치·관리 커넥션 수용 상한)</li>
+                <li><strong>PostgreSQL (1 vCPU · 512 MiB / Conn 60) &amp; HikariCP (max 10)</strong>: 운영 DB로 사용한 <strong>Supabase 무료 티어(Micro 컴퓨트) 스펙</strong>에 맞춰 로컬 DB 자원과 최대 커넥션을 제한. <code>HikariCP max 10</code>은 기본값(10) 유지로 1 vCPU DB의 커넥션 경합을 줄이고 관리·외부 커넥션 여유를 확보</li>
                 <li><strong>netem 2.8ms RTT</strong>: 운영 DB(Supabase) 실측 왕복 지연(~3.2ms)을 기준으로, 로컬 컨테이너 기본 지연을 고려해 네트워크 왕복 지연을 모사</li>
                 <li><strong>워밍업 + 60s × 3회 중앙값</strong>: JIT 컴파일·커넥션 풀·DB 버퍼 캐시 워밍업 후 3회 반복 측정의 중앙값을 채택해 일시적 GC·OS 스케줄링 노이즈 제거</li>
               </ul>
