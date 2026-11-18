@@ -494,6 +494,8 @@ section {
 .chart-list {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
   gap: 15px;
 }
 
