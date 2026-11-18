@@ -183,6 +183,15 @@
               <div class="spec-item"><span class="spec-key">k6 측정</span><span class="spec-val">워밍업 15~30s + 60s × 3회</span></div>
               <div class="spec-item"><span class="spec-key">동시 부하</span><span class="spec-val">각 10 VU (중앙값)</span></div>
             </div>
+            <div style="margin-top:12px;padding-top:10px;border-top:1px dashed var(--border);">
+              <div style="font-weight:700;font-size:0.8rem;color:var(--text);margin-bottom:6px;">스펙 설정 근거</div>
+              <ul style="margin:0;padding-left:18px;font-size:0.79rem;color:var(--text-muted);line-height:1.55;">
+                <li><strong>자원 상한 고정 (Backend 2 vCPU/1 GiB · DB 1 vCPU/512 MiB)</strong>: 호스트 PC 성능 편차를 배제하고 소형 단일 인스턴스 운영 환경을 모사. JVM Heap 550 MiB는 컨테이너 내 Metaspace·스레드·GC·OS 여유분(~470 MiB)을 확보해 OOM을 방지하기 위한 설정</li>
+                <li><strong>HikariCP max 10 &amp; 10 VU</strong>: 1 vCPU DB 환경에서 과도한 커넥션 경합을 피하고 풀 포화 경계선(1:1 매칭)에서의 쿼리·커넥션 풀 효율 차이를 명확히 관측하기 위해 설정 (DB <code>Conn 60</code>은 앱·배치·관리 커넥션 수용 상한)</li>
+                <li><strong>netem 2.8ms RTT</strong>: 로컬 루프백(0.05ms 이하)의 비현실적 초저지연을 배제하고 동일 리전 App–DB 간 실제 왕복 지연을 모사해 N+1·다중 왕복 비용을 정량화</li>
+                <li><strong>워밍업 + 60s × 3회 중앙값</strong>: JIT 컴파일·커넥션 풀·DB 버퍼 캐시 워밍업 후 3회 반복 측정의 중앙값을 채택해 일시적 GC·OS 스케줄링 노이즈 제거</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
