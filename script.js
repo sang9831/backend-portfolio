@@ -33,7 +33,6 @@
   ];
 
   const chartContainer = document.getElementById("latencyChart");
-  let scaleMode = "linear"; // 'linear' | 'log'
 
   function formatVal(val, unit) {
     if (val >= 1000 && unit === "ms") {
@@ -45,18 +44,11 @@
   function renderLatencyChart() {
     if (!chartContainer) return;
     const maxLinear = Math.max(...latencyMetrics.map((m) => m.before));
-    const maxLog = Math.log10(maxLinear + 1);
 
     chartContainer.innerHTML = latencyMetrics
       .map((m) => {
-        const beforePct =
-          scaleMode === "log"
-            ? (Math.log10(m.before + 1) / maxLog) * 100
-            : (m.before / maxLinear) * 100;
-        const afterPct =
-          scaleMode === "log"
-            ? (Math.log10(m.after + 1) / maxLog) * 100
-            : Math.max((m.after / maxLinear) * 100, 1.2);
+        const beforePct = (m.before / maxLinear) * 100;
+        const afterPct = Math.max((m.after / maxLinear) * 100, 1.2);
 
         return `
           <div class="bar-item">
@@ -78,15 +70,6 @@
       })
       .join("");
   }
-
-  document.querySelectorAll("[data-scale]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      scaleMode = btn.getAttribute("data-scale");
-      document.querySelectorAll("[data-scale]").forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      renderLatencyChart();
-    });
-  });
 
   renderLatencyChart();
 
