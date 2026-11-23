@@ -152,7 +152,7 @@
                 <li><strong>문제</strong>: 오픈 스파이크 시 <code>drop_options</code> 행 잠금을 먼저 잡은 채 주문·배송지·항목 INSERT를 수행해 직렬 대기 누적, DB 왕복 2회 및 풀 경합</li>
                 <li><strong>해결</strong>: <code>findOptionSnapshots</code>로 락 없이 단가 조회 후 주문·예약 INSERT를 먼저 수행하고 커밋 직전 마지막에 <code>tryReserveOption</code>(단일 조건부 <code>UPDATE ... RETURNING</code>) 실행, <code>OrderCreationLimiter</code> 상한을 HikariCP 풀 크기(10)에 맞춰 조정</li>
                 <li><strong>결과</strong>: V35 드롭 오픈 스파이크 주문 생성 p95 3,033.33ms→781.43ms(-74.2%, 거절 0건), DB 재고 왕복 2회→1회</li>
-                <li><strong>근거</strong>: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/219" target="_blank" rel="noopener">병목 #219</a> <span class="tag">sang9831 후속 최적화</span></li>
+                <li><strong>근거</strong>: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/219" target="_blank" rel="noopener">병목 #219</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/4539ce7e0c9d9c481434df850c6292c2dba6dfe1" target="_blank" rel="noopener">후속 최적화 4539ce7</a></li>
               </ul>
             </div>
           </div>
