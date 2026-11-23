@@ -199,6 +199,36 @@ section {
   font-size: 0.92rem;
 }
 
+.section-role {
+  margin: 8px 0 0;
+  font-size: 0.86rem;
+  color: var(--text);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.project-role {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+.role-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  vertical-align: baseline;
+}
+
 /* Hero */
 .hero {
   background: var(--bg-card);
@@ -846,29 +876,157 @@ footer {
 }
 
 /* Print / PDF */
+@page {
+  size: A4 portrait;
+  margin: 12mm 13mm;
+}
+
 @media print {
-  body {
-    background: #ffffff;
-    color: #0f172a;
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
   .topbar,
   .chart-controls,
-  .toast {
+  .toast,
+  .tabs,
+  #simSlider {
     display: none !important;
   }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  section {
+    margin-bottom: 22px;
+  }
+
+  .section-header {
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .hero {
+    padding: 18px 20px;
+    margin-bottom: 22px;
+    border-color: #cbd5e1;
+  }
+
+  .hero h1 {
+    font-size: 1.65rem;
+  }
+
+  .workflow-section {
+    margin-top: 16px;
+    padding-top: 14px;
+  }
+
+  .workflow-grid,
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .grid-2,
+  .detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .sim-widget {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .card {
+    padding: 14px 16px;
+    border-color: #cbd5e1;
+  }
+
+  /* Large tabbed container must be allowed to break across pages */
+  .card[data-tab-group] {
+    border: none;
+    padding: 0;
+    background: transparent;
+  }
+
   .tab-panel {
     display: block !important;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
+    padding: 14px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: var(--radius);
+    background: #ffffff;
   }
-  .tabs {
-    display: none;
-  }
-  .card,
-  .hero,
-  .table-wrap {
+
+  .workflow-card,
+  .project-card,
+  .detail-box,
+  .flow-strip,
+  .prompt-box,
+  .bar-item,
+  .sim-slider-box,
+  tr {
     break-inside: avoid;
+    page-break-inside: avoid;
   }
-  section {
-    margin-bottom: 32px;
+
+  .detail-box,
+  .workflow-card {
+    padding: 10px 12px;
+    border-color: #cbd5e1;
+    background: #f8fafc !important;
+  }
+
+  .table-wrap {
+    overflow: visible;
+    border-color: #cbd5e1;
+  }
+
+  table {
+    font-size: 0.78rem;
+  }
+
+  th,
+  td {
+    padding: 7px 9px;
+  }
+
+  .bar-track {
+    border-color: #cbd5e1;
+  }
+
+  .bar-before {
+    background: #fb7185 !important;
+  }
+
+  .bar-after {
+    background: #059669 !important;
+  }
+
+  footer {
+    padding: 14px 0 0;
+    margin-top: 12px;
   }
 }
