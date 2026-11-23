@@ -903,6 +903,17 @@ footer {
     display: none !important;
   }
 
+  /* Chromium PDF link annotation fix: inline-flex breaks clickable <a> rects in Save as PDF */
+  a {
+    text-decoration: underline !important;
+  }
+
+  .pr-link,
+  a.contact-pill {
+    display: inline-block !important;
+    vertical-align: baseline;
+  }
+
   .container {
     max-width: 100%;
     padding: 0;
