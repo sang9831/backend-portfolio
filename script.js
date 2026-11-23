@@ -28,7 +28,7 @@
     { name: "DROP 통계 조회 (p95)", before: 10770, after: 280.92, unit: "ms", reduction: "97.4%", note: "페이지 선별 후 통계 집계" },
     { name: "대시보드 요약 (p95)", before: 7500, after: 362.20, unit: "ms", reduction: "95.2%", note: "요약 쿼리 5회 → 단일 집계" },
     { name: "동시 주문 상세 조회 (p95)", before: 651.6, after: 39.77, unit: "ms", reduction: "93.9%", note: "목록 개선에 따른 DB 풀 경합 완화" },
-    { name: "주문 생성 (드롭 오픈 스파이크 p95)", before: 3033.33, after: 781.43, unit: "ms", reduction: "74.2%", note: "락 순서 최적화 · 상한 10" },
+    { name: "주문 생성 (드롭 오픈 스파이크 p95)", before: 848.21, after: 489.90, unit: "ms", reduction: "42.2%", note: "락 순서 최적화 · 상한 15" },
     { name: "Brevo SMTP 수신자 1명 추가 비용", before: 643, after: 134, unit: "ms", reduction: "79.2%", note: "개별 발송 → BCC 묶음 전송" }
   ];
 
