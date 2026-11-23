@@ -125,7 +125,7 @@
                 <li><strong>문제</strong>: 주문 핵심 정보와 배송지·취소 이력이 혼재(29개 컬럼, 9개 인덱스)</li>
                 <li><strong>해결</strong>: 배송지·취소 1:1 분리 및 미사용 인덱스 제거(V34), 결제 만료 부분 인덱스를 배송 배치와 공유(V35)</li>
                 <li><strong>결과</strong>: 컬럼 29→17개(-41.4%), 인덱스 9→7개(-22.2%)</li>
-                <li><strong>근거</strong>: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/d63e2b2acd72526efa4d4f943165413a6136e4ea" target="_blank" rel="noopener">V35 d63e2b2</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/197" target="_blank" rel="noopener">성능 #197</a></li>
+                <li><strong>근거 PR</strong>: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/d63e2b2acd72526efa4d4f943165413a6136e4ea" target="_blank" rel="noopener">V35 d63e2b2</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/197" target="_blank" rel="noopener">성능 #197</a></li>
               </ul>
             </div>
             <div class="detail-box">
@@ -134,7 +134,7 @@
                 <li><strong>문제</strong>: 페이지 자르기 전 다수 주문의 결제 정보 조회 및 COUNT에서도 LATERAL 실행</li>
                 <li><strong>해결</strong>: 페이지 우선 조회 후 결제·취소 결합, 결제 상태 필터 미사용 시 단순 COUNT 분리</li>
                 <li><strong>결과</strong>: 주문 목록 2,080ms→49.44ms(-97.6%), 동시 상세 651.60ms→39.77ms(-93.9%)</li>
-                <li><strong>근거</strong>: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/2681b754647ff8cece2376a4a6cfbcb7ccb01240" target="_blank" rel="noopener">2681b75</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/201" target="_blank" rel="noopener">성능 #201</a></li>
+                <li><strong>근거 PR</strong>: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/2681b754647ff8cece2376a4a6cfbcb7ccb01240" target="_blank" rel="noopener">2681b75</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/201" target="_blank" rel="noopener">성능 #201</a></li>
               </ul>
             </div>
             <div class="detail-box">
@@ -143,7 +143,7 @@
                 <li><strong>문제</strong>: 전체 후보 DROP마다 LATERAL 집계 및 요약 지표 5회 쿼리 분할 조회</li>
                 <li><strong>해결</strong>: 표시할 DROP 페이지 선별 후 통계 집계, 요약 쿼리 5회 호출을 단일 집계 쿼리로 통합</li>
                 <li><strong>결과</strong>: DROP 통계 10,770ms→280.92ms(-97.4%), 요약 7,500ms→362.20ms(-95.2%)</li>
-                <li><strong>근거</strong>: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/ede52c84e9b257841cc88afd6a55b1aec3c2bfbc" target="_blank" rel="noopener">ede52c8</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/201" target="_blank" rel="noopener">성능 #201</a></li>
+                <li><strong>근거 PR</strong>: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/ede52c84e9b257841cc88afd6a55b1aec3c2bfbc" target="_blank" rel="noopener">ede52c8</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/201" target="_blank" rel="noopener">성능 #201</a></li>
               </ul>
             </div>
             <div class="detail-box">
@@ -152,7 +152,7 @@
                 <li><strong>문제</strong>: 오픈 스파이크 시 <code>drop_options</code> 행 잠금을 먼저 잡은 채 주문·배송지·항목 INSERT를 수행해 직렬 대기 누적, DB 왕복 2회 및 풀 경합</li>
                 <li><strong>해결</strong>: <code>findOptionSnapshots</code>로 락 없이 단가 조회 후 경합 없는 주문·예약 INSERT를 병렬로 먼저 처리하고, 커밋 직전 마지막에 <code>tryReserveOption</code>(단일 조건부 <code>UPDATE ... RETURNING</code>) 실행 · <code>OrderCreationLimiter</code> 상한 15 조정</li>
                 <li><strong>결과</strong>: V35 드롭 오픈 스파이크 주문 생성 p95 848.21ms→489.90ms(-42.2% · 평균 -49.8%, 거절 0건), DB 재고 왕복 2회→1회</li>
-                <li><strong>근거</strong>: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/219" target="_blank" rel="noopener">병목 #219</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/4539ce7e0c9d9c481434df850c6292c2dba6dfe1" target="_blank" rel="noopener">락 순서 4539ce7</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/00661f0b" target="_blank" rel="noopener">상한15 00661f0</a></li>
+                <li><strong>근거 PR</strong>: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/219" target="_blank" rel="noopener">병목 #219</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/4539ce7e0c9d9c481434df850c6292c2dba6dfe1" target="_blank" rel="noopener">락 순서 4539ce7</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/00661f0b" target="_blank" rel="noopener">상한15 00661f0</a></li>
               </ul>
             </div>
           </div>
@@ -208,7 +208,7 @@
               <ul>
                 <li>비공개 Storage 내 서류 암호문 안전 보관 확인</li>
                 <li>운영자 열람 화면 워터마크 표시 및 접근 로그 DB 적재 확인</li>
-                <li>관련 PR: <a href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/103" target="_blank" rel="noopener">#103 (암호화 저장)</a> · <a href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/107" target="_blank" rel="noopener">#107 (열람·워터마크·로그)</a></li>
+                <li><strong>근거 PR</strong>: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/103" target="_blank" rel="noopener">서류 #103</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/107" target="_blank" rel="noopener">열람 #107</a></li>
               </ul>
             </div>
           </div>
@@ -260,7 +260,7 @@
               <ul>
                 <li>수신자 1명 추가 비용: <span class="num-before">0.643초</span> → <span class="num-after">0.134초</span> (<strong>약 79% 감소</strong>)</li>
                 <li>BCC 10명 받은편지함 정상 도착 확인 (전체 발송시간 개선율 별도 미측정)</li>
-                <li>근거 PR: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/75" target="_blank" rel="noopener">메일 #75</a></li>
+                <li><strong>근거 PR</strong>: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/75" target="_blank" rel="noopener">메일 #75</a></li>
               </ul>
             </div>
           </div>
@@ -296,7 +296,7 @@
               <h4>검증 및 PR</h4>
               <ul>
                 <li>배송 상세 상태 UI 실시간 반영 확인</li>
-                <li>PR: <a href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/91" target="_blank" rel="noopener">#91 (자동 진행)</a> · <a href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/127" target="_blank" rel="noopener">#127 (UI 연동)</a> · <a href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/192" target="_blank" rel="noopener">#192 (Soak 검증)</a></li>
+                <li><strong>근거 PR</strong>: <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/91" target="_blank" rel="noopener">배송 #91</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/127" target="_blank" rel="noopener">UI #127</a> <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/192" target="_blank" rel="noopener">Soak #192</a></li>
               </ul>
             </div>
           </div>
