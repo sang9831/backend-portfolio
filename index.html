@@ -13,18 +13,15 @@
   <header class="topbar">
     <div class="topbar-inner">
       <a href="#top" class="brand" style="text-decoration:none;">
-        <span class="brand-mark">ASM</span>
         <span>안상민 · Backend Portfolio</span>
       </a>
       <nav class="nav-links" aria-label="주요 섹션">
-        <a href="#impact">성과 요약</a>
         <a href="#projects">프로젝트</a>
         <a href="#grab">GRAB</a>
         <a href="#majuhankki">마주한끼</a>
         <a href="#pictrip">PicTrip</a>
       </nav>
       <div class="nav-actions">
-        <button id="themeToggle" class="btn" type="button">라이트 모드</button>
         <button class="btn btn-primary" type="button" onclick="window.print()">PDF / 인쇄</button>
       </div>
     </div>
@@ -33,7 +30,7 @@
   <main id="top" class="container">
     <!-- Hero & Executive Summary -->
     <section class="hero" aria-label="프로필 요약">
-      <div class="hero-top">
+      <div class="hero-top hero-top-single">
         <div>
           <div class="hero-role">Backend Engineer · 신입 백엔드 개발자</div>
           <h1>안상민</h1>
@@ -53,227 +50,45 @@
             </a>
           </div>
         </div>
+      </div>
 
-        <div class="workflow-box">
+      <!-- Detailed Development Workflow -->
+      <div class="workflow-section">
+        <div class="workflow-section-header">
+          <span class="workflow-section-eyebrow">DEVELOPMENT WORKFLOW</span>
           <h3>개발 방식 (AI-Assisted Workflow)</h3>
-          <div class="workflow-steps">
-            <div class="workflow-step">
+        </div>
+        <div class="workflow-grid">
+          <div class="workflow-card">
+            <div class="workflow-card-head">
               <span class="workflow-num">01</span>
-              <span>요구사항 · 구현 요청 정리</span>
+              <h4>요구사항 분석 · 구현 설계</h4>
             </div>
-            <div class="workflow-step">
+            <p>구현할 기능의 핵심 요구사항과 예외 상황(권한 검증, 동시성 제어, 데이터 정합성)을 먼저 정리합니다. 도메인 경계와 API 입출력 스펙을 구체화해 AI에게 명확한 설계 기준을 전달합니다.</p>
+          </div>
+          <div class="workflow-card">
+            <div class="workflow-card-head">
               <span class="workflow-num">02</span>
-              <span>AI 활용 코드 작성 및 구조화</span>
+              <h4>AI 활용 코드 작성 · 구조화</h4>
             </div>
-            <div class="workflow-step">
+            <p>정리한 설계를 바탕으로 AI와 함께 코드를 작성하고, 단순 생성에 그치지 않고 스키마 정규화·쿼리 분리·예외 분기 처리 등 유지보수성과 안전성을 기준으로 코드를 직접 검토하고 구조화합니다.</p>
+          </div>
+          <div class="workflow-card">
+            <div class="workflow-card-head">
               <span class="workflow-num">03</span>
-              <span>실행 화면 · 부하 계측 · 동작 검증</span>
+              <h4>실행 화면 · 부하 계측 · 동작 검증</h4>
             </div>
+            <p>구현 결과는 실제 실행 화면과 로그로 1차 검증하고, 성능이 중요한 구간은 Docker 자원 제한 환경에서 k6 부하 테스트로 병목을 계측해 수치로 개선 여부를 확인합니다.</p>
           </div>
-        </div>
-      </div>
-
-      <!-- 4 Headline KPIs -->
-      <div class="kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-label">최대 조회 응답속도 개선 (p95)</div>
-          <div class="kpi-value positive">-97.6%</div>
-          <div class="kpi-detail">주문 목록 2,080ms → 49.44ms</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">대시보드 통계 조회 개선 (p95)</div>
-          <div class="kpi-value positive">-97.4%</div>
-          <div class="kpi-detail">DROP 통계 10,770ms → 280.92ms</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">SMTP 수신자 추가 비용 절감</div>
-          <div class="kpi-value positive">-79.2%</div>
-          <div class="kpi-detail">0.643초 → 0.134초 (BCC)</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">orders 테이블 구조 슬림화</div>
-          <div class="kpi-value">-41.4%</div>
-          <div class="kpi-detail">컬럼 29→17개 · 인덱스 9→7개</div>
         </div>
       </div>
     </section>
 
-    <!-- Section 1: Performance Impact Dashboard -->
-    <section id="impact">
-      <div class="section-header">
-        <div>
-          <div class="section-eyebrow">01 / Measurable Impact</div>
-          <h2 class="section-title">한눈에 보는 성과 지표 (Before vs After)</h2>
-          <p class="section-sub">Docker Compose 동일 자원 제한 · V35 스키마 · k6 3회 측정 중앙값 기준 (2026.11.12 재측정)</p>
-        </div>
-        <div class="chart-controls">
-          <button class="tab-btn active" type="button" data-scale="linear">선형 스케일 (ms)</button>
-          <button class="tab-btn" type="button" data-scale="log">로그 스케일 (비율 비교)</button>
-        </div>
-      </div>
-
-      <div class="grid-2" style="margin-bottom: 20px;">
-        <!-- Visual Bar Chart -->
-        <div class="card" style="display:flex;flex-direction:column;">
-          <h3 class="card-title">응답 지연 · 발송 비용 개선 차트</h3>
-          <p class="card-sub">각 지표의 개선 전(상단)과 개선 후(하단) 수치를 비교합니다.</p>
-          <div class="chart-legend">
-            <span><span class="legend-dot" style="background:var(--rose);"></span>Before (개선 전)</span>
-            <span><span class="legend-dot" style="background:var(--green);"></span>After (개선 후)</span>
-          </div>
-          <div id="latencyChart" class="chart-list"></div>
-        </div>
-
-        <!-- Schema & Test Environment Visual -->
-        <div class="card" style="display:flex;flex-direction:column;gap:14px;">
-          <div>
-            <h3 class="card-title">DB 스키마 정규화 &amp; 부하테스트 환경</h3>
-            <p class="card-sub" style="margin-bottom:12px;">동일 시드(DROP 1,000개 · 주문 20,000건) 및 네트워크 지연(netem 2.8ms) 모사 환경</p>
-
-            <!-- Schema SVG Comparison -->
-            <div style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-                <span style="font-weight:700;font-size:0.9rem;">orders 테이블 구조 개선 (V34 · V35)</span>
-                <span class="tag green">1:1 분리 · 부분 인덱스 공유</span>
-              </div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                <div>
-                  <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:4px;">컬럼 수 (41.4% 축소)</div>
-                  <div style="font-family:var(--font-mono);font-size:1.1rem;font-weight:700;">
-                    <span class="num-before">29개</span> → <span class="num-after">17개</span>
-                  </div>
-                  <div style="height:8px;background:var(--bg-card);border-radius:4px;overflow:hidden;margin-top:6px;">
-                    <div style="width:58.6%;height:100%;background:var(--green);"></div>
-                  </div>
-                </div>
-                <div>
-                  <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:4px;">인덱스 수 (22.2% 축소)</div>
-                  <div style="font-family:var(--font-mono);font-size:1.1rem;font-weight:700;">
-                    <span class="num-before">9개</span> → <span class="num-after">7개</span>
-                  </div>
-                  <div style="height:8px;background:var(--bg-card);border-radius:4px;overflow:hidden;margin-top:6px;">
-                    <div style="width:77.8%;height:100%;background:var(--accent);"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Load test specs -->
-          <div style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
-            <div style="font-weight:700;font-size:0.86rem;margin-bottom:10px;">Docker Compose 로컬 부하테스트 스펙</div>
-            <div class="spec-grid">
-              <div class="spec-item"><span class="spec-key">Backend</span><span class="spec-val">2 vCPU · 1 GiB (Heap 550 MiB)</span></div>
-              <div class="spec-item"><span class="spec-key">PostgreSQL</span><span class="spec-val">1 vCPU · 512 MiB (Conn 60)</span></div>
-              <div class="spec-item"><span class="spec-key">HikariCP</span><span class="spec-val">max 10</span></div>
-              <div class="spec-item"><span class="spec-key">Network</span><span class="spec-val">netem 2.8ms RTT</span></div>
-              <div class="spec-item"><span class="spec-key">k6 측정</span><span class="spec-val">워밍업 15~30s + 60s × 3회 (중앙값)</span></div>
-            </div>
-            <div style="margin-top:12px;padding-top:10px;border-top:1px dashed var(--border);">
-              <div style="font-weight:700;font-size:0.8rem;color:var(--text);margin-bottom:6px;">스펙 설정 근거</div>
-              <ul style="margin:0;padding-left:18px;font-size:0.79rem;color:var(--text-muted);line-height:1.55;">
-                <li><strong>Backend (2 vCPU · 1 GiB / Heap 550 MiB)</strong>: 지급받은 <code>t3.small</code>(2 vCPU · 2 GiB) 환경에서 <code>t3.micro</code>(2 vCPU · 1 GiB) 스펙에 맞춰 보수적으로 자원 상한을 고정. Heap 550 MiB는 Non-Heap·GC·OS 여유분을 확보해 OOM을 방지하기 위한 설정</li>
-                <li><strong>PostgreSQL (1 vCPU · 512 MiB / Conn 60) &amp; HikariCP (max 10)</strong>: 운영 DB로 사용한 <strong>Supabase 무료 티어(Micro 컴퓨트) 스펙</strong>에 맞춰 로컬 DB 자원과 최대 커넥션을 제한. <code>HikariCP max 10</code>은 기본값(10) 유지로 1 vCPU DB의 커넥션 경합을 줄이고 관리·외부 커넥션 여유를 확보</li>
-                <li><strong>netem 2.8ms RTT</strong>: 운영 DB(Supabase) 실측 왕복 지연(~3.2ms)을 기준으로, 로컬 컨테이너 기본 지연을 고려해 네트워크 왕복 지연을 모사</li>
-                <li><strong>워밍업 + 60s × 3회 중앙값</strong>: JIT 컴파일·커넥션 풀·DB 버퍼 캐시 워밍업 후 3회 반복 측정의 중앙값을 채택해 일시적 GC·OS 스케줄링 노이즈 제거</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Comprehensive Performance Table -->
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>측정 항목</th>
-              <th>Before</th>
-              <th>After</th>
-              <th>개선율</th>
-              <th>핵심 해결 기법</th>
-              <th>근거</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>판매자 주문 목록 (HTTP p95)</strong></td>
-              <td class="num-before">2,080ms</td>
-              <td class="num-after">49.44ms</td>
-              <td><span class="tag green">-97.6%</span></td>
-              <td>페이지 우선 조회 후 결제·취소 결합, 필터 없을 시 단순 COUNT</td>
-              <td>
-                <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/2681b754647ff8cece2376a4a6cfbcb7ccb01240" target="_blank" rel="noopener">2681b75</a>
-                <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/d63e2b2acd72526efa4d4f943165413a6136e4ea" target="_blank" rel="noopener">V35 d63e2b2</a>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>DROP 통계 조회 (HTTP p95)</strong></td>
-              <td class="num-before">10,770ms</td>
-              <td class="num-after">280.92ms</td>
-              <td><span class="tag green">-97.4%</span></td>
-              <td>전체 후보 LATERAL 집계 제거 → 표시할 DROP 페이지 선별 후 집계</td>
-              <td>
-                <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/2681b754647ff8cece2376a4a6cfbcb7ccb01240" target="_blank" rel="noopener">2681b75</a>
-                <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/d63e2b2acd72526efa4d4f943165413a6136e4ea" target="_blank" rel="noopener">V35 d63e2b2</a>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>대시보드 요약 (HTTP p95)</strong></td>
-              <td class="num-before">7,500ms</td>
-              <td class="num-after">362.20ms</td>
-              <td><span class="tag green">-95.2%</span></td>
-              <td>요약 지표 5회 쿼리 호출을 단일 집계 쿼리로 통합</td>
-              <td>
-                <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/ede52c84e9b257841cc88afd6a55b1aec3c2bfbc" target="_blank" rel="noopener">ede52c8</a>
-                <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/2681b754647ff8cece2376a4a6cfbcb7ccb01240" target="_blank" rel="noopener">2681b75</a>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>동시 주문 상세 (HTTP p95)</strong></td>
-              <td class="num-before">651.60ms</td>
-              <td class="num-after">39.77ms</td>
-              <td><span class="tag green">-93.9%</span></td>
-              <td>목록 페이지 우선 리팩터링에 따른 DB 커넥션 풀(HikariCP) 경합 완화</td>
-              <td>
-                <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/2681b754647ff8cece2376a4a6cfbcb7ccb01240" target="_blank" rel="noopener">2681b75</a>
-                <a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/commit/d63e2b2acd72526efa4d4f943165413a6136e4ea" target="_blank" rel="noopener">V35 d63e2b2</a>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>주문 생성 (HTTP p95)</strong></td>
-              <td class="num-before">4.08s</td>
-              <td class="num-after">1.36s</td>
-              <td><span class="tag green">-66.7% (거절 0건)</span></td>
-              <td>전역 동시 실행 상한(20, 초과 시 503·Retry-After) · 단일 조건부 UPDATE</td>
-              <td><a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/219" target="_blank" rel="noopener">PR #219</a></td>
-            </tr>
-            <tr>
-              <td><strong>재고 잠금·증가 DB 왕복</strong></td>
-              <td class="num-before">2회</td>
-              <td class="num-after">1회</td>
-              <td><span class="tag green">-50.0%</span></td>
-              <td><code>tryReserveOption</code> 조건부 <code>UPDATE ... RETURNING</code> 통합</td>
-              <td><a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/219" target="_blank" rel="noopener">PR #219</a></td>
-            </tr>
-            <tr>
-              <td><strong>Brevo SMTP 수신자 1명 추가 비용</strong></td>
-              <td class="num-before">0.643초</td>
-              <td class="num-after">0.134초</td>
-              <td><span class="tag green">약 -79%</span></td>
-              <td>동일 DROP 알림 수신자를 BCC로 묶어 본문 1회 전송 (10명 수신 확인)</td>
-              <td><a class="pr-link" href="https://github.com/prgrms-aibe-devcourse/AIBE7_FinalProject_Team3/pull/75" target="_blank" rel="noopener">PR #75</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Section 2: Projects Overview -->
+    <!-- Section 1: Projects Overview -->
     <section id="projects">
       <div class="section-header">
         <div>
-          <div class="section-eyebrow">02 / Projects Overview</div>
+          <div class="section-eyebrow">01 / Projects Overview</div>
           <h2 class="section-title">프로젝트별 구현 경험</h2>
           <p class="section-sub">최종·2차·1차 프로젝트를 통해 백엔드 아키텍처, 성능 최적화, AI 파이프라인을 구축했습니다.</p>
         </div>
@@ -338,7 +153,7 @@
     <section id="grab">
       <div class="section-header">
         <div>
-          <div class="section-eyebrow">03 / Final Project</div>
+          <div class="section-eyebrow">02 / Final Project</div>
           <h2 class="section-title">GRAB · 한정 수량 커머스</h2>
           <p class="section-sub">판매자 신청·심사부터 주문·결제, 송장·배송 관리까지의 커머스 핵심 백엔드 및 성능 최적화</p>
         </div>
@@ -539,7 +354,7 @@
     <section id="majuhankki">
       <div class="section-header">
         <div>
-          <div class="section-eyebrow">04 / Second Project</div>
+          <div class="section-eyebrow">03 / Second Project</div>
           <h2 class="section-title">마주한끼 · 실시간 채팅 &amp; 성향 벡터 매칭</h2>
           <p class="section-sub">WebSocket/STOMP 기반 채팅 보안·커서 페이징과 pgvector 키워드 임베딩 점수화 알고리즘</p>
         </div>
@@ -685,7 +500,7 @@
     <section id="pictrip">
       <div class="section-header">
         <div>
-          <div class="section-eyebrow">05 / First Project</div>
+          <div class="section-eyebrow">04 / First Project</div>
           <h2 class="section-title">PicTrip · 이미지 분석 기반 여행지 추천</h2>
           <p class="section-sub">Gemini 시각 분석과 Kakao Local 실제 장소 검증을 결합한 신뢰성 있는 추천 파이프라인</p>
         </div>
