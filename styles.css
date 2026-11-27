@@ -926,14 +926,17 @@ footer {
   }
 
   .hero-top {
-    grid-template-columns: 1fr auto;
-    gap: 18px;
-    align-items: center;
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    gap: 18px !important;
+    align-items: center !important;
   }
 
   .contact-col {
-    min-width: 215px;
-    gap: 5px;
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 215px !important;
+    gap: 5px !important;
   }
 
   .contact-col .contact-pill {
