@@ -920,10 +920,33 @@ footer {
     text-decoration: underline !important;
   }
 
-  .pr-link,
-  a.contact-pill {
+  .pr-link {
     display: inline-block !important;
     vertical-align: baseline;
+  }
+
+  .hero-top {
+    grid-template-columns: 1fr auto;
+    gap: 18px;
+    align-items: center;
+  }
+
+  .contact-col {
+    min-width: 215px;
+    gap: 5px;
+  }
+
+  .contact-col .contact-pill {
+    display: block !important;
+    width: 100%;
+    text-align: right;
+    padding: 5px 10px;
+    overflow: hidden;
+  }
+
+  .contact-col .contact-label {
+    float: left;
+    margin-right: 12px;
   }
 
   .container {
