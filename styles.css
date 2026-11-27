@@ -240,9 +240,21 @@ section {
 
 .hero-top {
   display: grid;
-  grid-template-columns: 1.55fr 1fr;
+  grid-template-columns: 1fr auto;
   gap: 28px;
-  align-items: start;
+  align-items: center;
+}
+
+.contact-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 240px;
+}
+
+.contact-col .contact-pill {
+  width: 100%;
+  justify-content: space-between;
 }
 
 .hero-role {
